@@ -29,7 +29,7 @@ const Questions = () => {
 
     // useEffect(() => {
     //     const promise = client.subscribe(['collections.questions.documents'], (data) => {
-
+                
     //     });
 
     //     promise.then(function (response) {
