@@ -14,25 +14,21 @@ const Questions = () => {
         .setEndpoint('https://cloud.appwrite.io/v1')
         .setProject('646be96ac195499e31c0');
 
-    // // Con esto se pueden crear registros!
-    // const promise = databases.createDocument(
-    //     '646beb350730365f9314', '646beb48cf58113e0f44', ID.unique(), {
-    //         Description: "prueba"
-    //     }
-    // );
+    // On component mount (an ONLY once), I retrieve all the questions available
+    useEffect(() => {
 
-    // useEffect(() => {
+        // Get the array of questions
+        const promise = databases.listDocuments('646beb350730365f9314', '646e0add6b18024c13be');
 
-    //     const promise = databases.listDocuments('646beb350730365f9314', '646e0add6b18024c13be');
+        // Store the array on the questionRecords State
+        promise.then(function (response) {
+            console.log(response); // Success
+            setQuestionRecords(response.documents);
+        }, function (error) {
+            console.log(error); // Failure
+        });
 
-    //     promise.then(function (response) {
-    //         console.log(response); // Success
-    //         setQuestionRecords(response.documents);
-    //     }, function (error) {
-    //         console.log(error); // Failure
-    //     });
-
-    // }, [count]);
+    }, []);
 
     // const [questions, setQuestions] = useState([]);
 
@@ -54,10 +50,12 @@ const Questions = () => {
         <div>
             <h3>Question number {count}</h3>
 
-            <p>{ questionRecords }</p>
+            {/* <p>{ questionRecords }</p> */}
 
-            {questionRecords.map((pregunta) => (
-                <p key={ pregunta['$id'] }>{ pregunta['Description'] }</p>
+            {questionRecords.map(pregunta => (
+                <div key={ pregunta['$id'] }>
+                    <p>{ pregunta['Description'] }</p>
+                </div>
             ))}
 
             <button onClick={() => setCount((count) => count + 1)}>
