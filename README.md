@@ -6,11 +6,15 @@ Gifting is a project built to participate into the Appwrite + Hashnode Hackathon
 
 First, you need to install all dependencies and packages:
 
-'npm i'
+```bash
+npm i
+```
 
 Then, you can start the app using:
 
-'npm run dev'
+```bash
+npm run dev
+```
 
 ## Useful code
 
