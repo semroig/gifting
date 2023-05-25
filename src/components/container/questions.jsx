@@ -5,7 +5,8 @@ import { Client, Databases, ID } from 'appwrite';
 const Questions = () => {
 
     const [questionRecords, setQuestionRecords] = useState([]);
-    const [count, setCount] = useState(0)
+    const [totalRecords, setTotalRecords] = useState(0);
+    const [count, setCount] = useState(0);
 
     const client = new Client();
     const databases = new Databases(client);
@@ -23,7 +24,10 @@ const Questions = () => {
         // Store the array on the questionRecords State
         promise.then(function (response) {
             console.log(response); // Success
+
+            // Set the states with the data retrieved
             setQuestionRecords(response.documents);
+            setTotalRecords(response.total);
         }, function (error) {
             console.log(error); // Failure
         });
@@ -50,7 +54,7 @@ const Questions = () => {
         <div>
             <h3>Question number {count}</h3>
 
-            {/* <p>{ questionRecords }</p> */}
+            {/* <p>{ questionRecords[0] }</p> */}
 
             {questionRecords.map(pregunta => (
                 <div key={ pregunta['$id'] }>
@@ -58,8 +62,13 @@ const Questions = () => {
                 </div>
             ))}
 
-            <button onClick={() => setCount((count) => count + 1)}>
-                Next quesion
+            <button onClick={() => {
+                setCount((count) => count + 1);
+
+                console.log("random number for index");
+                console.log(Math.random() * totalRecords | 0);
+            }}>
+                Next question
             </button>
         </div>
     );
