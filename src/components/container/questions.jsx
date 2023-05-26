@@ -54,7 +54,7 @@ const Questions = () => {
         <div>
             <h3>Question number {count}</h3>
 
-            {/* <p>{ questionRecords[0] }</p> */}
+            {/* <p>{ questionRecords[0]['Description'] }</p> */}
 
             {questionRecords.map(pregunta => (
                 <div key={ pregunta['$id'] }>
