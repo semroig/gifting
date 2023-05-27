@@ -1,13 +1,11 @@
-import React from 'react';
-
-import Questions from '../../components/container/questions';
-
+import {Flex} from "@chakra-ui/react";
+import Questions from 'components/container/questions';
 
 const QuizPage = () => {
     return (
-        <div>
+        <Flex height="100%" alignItems="center" pb={20}>
             <Questions></Questions>
-        </div>
+        </Flex>
     );
 }
 
