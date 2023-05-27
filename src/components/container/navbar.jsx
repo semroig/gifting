@@ -1,37 +1,47 @@
-import {useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Box, Container, Flex, Button } from "@chakra-ui/react";
+
 import Logo from "components/pure/logo";
 
 export default function Navbar() {
-    const navigate = useNavigate();
-    const [isAuth, setIsAuth] = useState(true)
+  const navigate = useNavigate();
+  const [isAuth, setIsAuth] = useState(true);
 
-    const handleSignOut = () => {
-        setIsAuth(false)
-        navigate("/", {replace: true})
-    }
+  const handleSignOut = () => {
+    setIsAuth(false);
+    navigate("/", { replace: true });
+  };
 
-    return (
-        <nav>
-            <Link to="/"> <Logo /> </Link>
+  return (
+    <Box as="nav" bgColor="gray.50">
+      <Container maxW="container.lg" py={4}>
+        <Flex justifyContent="space-between" alignItems="center">
+          <Link to="/">
+            <Logo />
+          </Link>
 
-            {!isAuth
-                ? (
-                    <div>
-                        <Link to="/signin">Sign in</Link>
-                        <Link to="/signup">Sign up</Link>
-                    </div>
-                )
-                : (
-                    <div>
-                        <Link to="/quiz/questions">New quiz</Link>
-                        <Link to="/quiz/history">History</Link>
-                        <button onClick={handleSignOut}>Sign out</button>
-                    </div>
-                )
-            }
-        </nav>
-    )
+          <Flex gap={4} alignItems="center" fontWeight="semibold">
+            {!isAuth ? (
+              <>
+                <Button as={Link} to="/signin">
+                  Sign in
+                </Button>
+
+                <Button as={Link} to="/signup">
+                  Sign up
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/quiz/questions">New quiz</Link>
+                <Link to="/quiz/history">History</Link>
+                <Button onClick={handleSignOut}>Sign out</Button>
+              </>
+            )}
+          </Flex>
+        </Flex>
+      </Container>
+    </Box>
+  );
 }
-
-
