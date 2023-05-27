@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Text, Button, Flex, Container, Heading } from "@chakra-ui/react";
+
 import { questionsService } from "services";
 
 const Questions = () => {
@@ -36,17 +38,19 @@ const Questions = () => {
     if(!question) return <p>No questions</p>
 
     return (
-        <div>
-            <h2>Question number { count }</h2>
+        <Container maxWidth="container.sm">
+            <Heading size="lg">Question number { count }</Heading>
 
-            <p> {question.Description} </p>
+            <Text fontWeight="semibold" fontSize="xl" my={4}>
+                {question.Description}
+            </Text>
             
-            <div>
-                <button value='yes' onClick={handleResponse}>Yes</button>
-                <button value="no" onClick={handleResponse}>No</button>
-                <button value="skip" onClick={handleResponse}>Skip</button>
-            </div>
-        </div>
+            <Flex flexDir="column" align="center" gap={2}>
+                <Button width="80px" value='yes' onClick={handleResponse}>Yes</Button>
+                <Button width="80px" value="no" onClick={handleResponse}>No</Button>
+                <Button width="80px" value="skip" onClick={handleResponse}>Skip</Button>
+            </Flex>
+        </Container>
     );
 }
 
