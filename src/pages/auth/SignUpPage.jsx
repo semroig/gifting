@@ -1,9 +1,9 @@
-import React from 'react';
+import { Link } from "react-router-dom";
 
 const SignUpPage = () => {
     return (
         <div>
-            
+            <Link to="/quiz">Sign up</Link>
         </div>
     );
 }
