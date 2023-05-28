@@ -1,6 +1,8 @@
 import { appwriteClient } from "clients";
 import { getRandomNumber } from "utilities";
 
+
+// Se puede renombrar a QuestionService nomas?
 export class QuestionsService {
     #questions = []
 
