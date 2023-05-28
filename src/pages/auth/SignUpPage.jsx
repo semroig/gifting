@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { Container, Grid, GridItem, Heading, Button, Flex } from "@chakra-ui/react";
 
+// Import form container component
+import SignUpForm from "../../components/container/forms/signUpForm";
+
 const SignUpPage = () => {
     return (
         <Grid minH="100vh" templateRows="1fr">
@@ -9,7 +12,7 @@ const SignUpPage = () => {
               <Flex flexDir="column">
                 <Heading mb={10}>Sign up</Heading>
     
-                formulario
+                <SignUpForm></SignUpForm>
     
                 <Button as={Link} to="/quiz" w="100%" mt="auto">
                   Sign up
