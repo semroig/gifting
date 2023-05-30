@@ -14,9 +14,9 @@ const SigInPage = () => {
 
             <SignInForm></SignInForm>
 
-            <Button as={Link} to="/quiz" w="100%" mt="auto">
+            {/* <Button as={Link} to="/quiz" w="100%" mt="auto">
               Sign in
-            </Button>
+            </Button> */}
           </Flex>
 
           <GridItem bg="gray.200" />
