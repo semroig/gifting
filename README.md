@@ -1,6 +1,6 @@
 # Gifting
 
-Gifting is a project built to participate into the [Appwrite + Hashnode Hackathon](https://hashnode.com/hackathons/appwrite).
+Gifting is a project built to participate into the [Appwrite + Hashnode Hackathon](https://hashnode.com/hackathons/appwrite). It's online hosted by Netlify, click [here](https://main--strong-banoffee-c8a8e0.netlify.app/) to play demo.
 
 ## How to start the project?
 
