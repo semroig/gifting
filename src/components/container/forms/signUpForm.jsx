@@ -19,6 +19,8 @@ const SignUpForm = () => {
         // we need to add more (amount of chars in password...)
     const signUpSchema = Yup.object().shape(
         {
+            name: Yup.string()
+                    .required('Name is required'),
             email: Yup.string()
                     .email('Invalid email format')
                     .required('Email is required'),
@@ -50,8 +52,19 @@ const SignUpForm = () => {
                 {({ handleSubmit, errors, touched }) => (
                     <form onSubmit={handleSubmit}>
                         <VStack spacing={4} align="flex-start">
+                            <FormControl isInvalid={!!errors.name && touched.name}>
+                                <FormLabel htmlFor="name">First name</FormLabel>
+                                <Field
+                                    as={Input}
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    variant="filled"
+                                />
+                                <FormErrorMessage>{errors.name}</FormErrorMessage>
+                            </FormControl>
                             <FormControl isInvalid={!!errors.email && touched.email}>
-                                <FormLabel htmlFor="email">Email Address</FormLabel>
+                                <FormLabel htmlFor="email">Email</FormLabel>
                                 <Field
                                     as={Input}
                                     id="email"
