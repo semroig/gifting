@@ -39,6 +39,7 @@ const SignInForm = () => {
                 onSubmit={(values) => {
                     alert(JSON.stringify(values, null, 2));
 
+                    // Call createEmailSession service
                     // Redirect to Home
                 }}
                 validationSchema={ loginSchema }
