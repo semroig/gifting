@@ -1,10 +1,7 @@
-// Chakra + formik??
-// Chakra + formik??
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik, Field } from "formik";
 import {
   Box,
   Button,
-  Checkbox,
   FormControl,
   FormLabel,
   FormErrorMessage,
@@ -18,6 +15,8 @@ import * as Yup from 'yup';
 
 const SignUpForm = () => {
 
+    // Yup validations:
+        // we need to add more (amount of chars in password...)
     const signUpSchema = Yup.object().shape(
         {
             email: Yup.string()
@@ -60,7 +59,6 @@ const SignUpForm = () => {
                                     type="email"
                                     variant="filled"
                                 />
-                                {/* <ErrorMessage name="email" /> */}
                                 <FormErrorMessage>{errors.email}</FormErrorMessage>
                             </FormControl>
                             <FormControl isInvalid={!!errors.password && touched.password}>
@@ -72,7 +70,6 @@ const SignUpForm = () => {
                                     type="password"
                                     variant="filled"
                                 />
-                                {/* <ErrorMessage name="password" /> */}
                                 <FormErrorMessage>{errors.password}</FormErrorMessage>
                             </FormControl>
                             <FormControl isInvalid={!!errors.confirmation && touched.confirmation}>
@@ -84,7 +81,6 @@ const SignUpForm = () => {
                                     type="password"
                                     variant="filled"
                                 />
-                                {/* <ErrorMessage name="confirmation" /> */}
                                 <FormErrorMessage>{errors.confirmation}</FormErrorMessage>
                             </FormControl>
                             <Button w="full" type="submit" mt="auto">
