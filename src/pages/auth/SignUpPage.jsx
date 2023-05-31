@@ -14,9 +14,9 @@ const SignUpPage = () => {
     
                 <SignUpForm></SignUpForm>
     
-                <Button as={Link} to="/quiz" w="100%" mt="auto">
+                {/* <Button as={Link} to="/quiz" w="100%" mt="auto">
                   Sign up
-                </Button>
+                </Button> */}
               </Flex>
     
               <GridItem bg="gray.200" />
