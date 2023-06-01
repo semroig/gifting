@@ -1,5 +1,4 @@
-// Chakra + formik??
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik, Field } from "formik";
 import {
   Box,
   Button,
@@ -8,15 +7,22 @@ import {
   FormLabel,
   FormErrorMessage,
   Input,
-  VStack
+  VStack,
+  useToast
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
-// Need to use this on the onsubmit event
-// import { Link } from "react-router-dom";
+import { accountsService } from "services";
 
 
 const SignInForm = () => {
+
+    const navigate = useNavigate();
+    const toast = useToast()
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const loginSchema = Yup.object().shape(
         {
@@ -37,25 +43,42 @@ const SignInForm = () => {
                     rememberMe: false
                 }}
                 onSubmit={(values) => {
-                    alert(JSON.stringify(values, null, 2));
+                    setIsLoading(true)
 
-                    // Redirect to Home
+                    accountsService.createEmailSession(values)
+                        .then(() => {
+                            console.info
+                            navigate("/quiz", { replace: true });
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            toast({
+                                position: 'top',
+                                title: 'Error logging into your account.',
+                                description: "Description hereee",
+                                status: 'error',
+                                duration: 4000,
+                                isClosable: true,
+                            })
+                        })
+                        .finally(() => {
+                            setIsLoading(false)
+                        })
                 }}
                 validationSchema={ loginSchema }
             >
                 {({ handleSubmit, errors, touched }) => (
                     <form onSubmit={handleSubmit}>
                         <VStack spacing={4} align="flex-start">
-                            <FormControl>
+                            <FormControl isInvalid={!!errors.email && touched.email}>
                                 <FormLabel htmlFor="email">Email Address</FormLabel>
                                 <Field
-                                as={Input}
-                                id="email"
-                                name="email"
-                                type="email"
-                                variant="filled"
+                                    as={Input}
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    variant="filled"
                                 />
-                                <ErrorMessage name="email" />
                                 <FormErrorMessage>{errors.email}</FormErrorMessage>
                             </FormControl>
                             <FormControl isInvalid={!!errors.password && touched.password}>
@@ -66,17 +89,7 @@ const SignInForm = () => {
                                 name="password"
                                 type="password"
                                 variant="filled"
-                                validate={(value) => {
-                                    let error;
-
-                                    if (value.length < 6) {
-                                    error = "Password must contain at least 6 characters";
-                                    }
-
-                                    return error;
-                                }}
                                 />
-                                <ErrorMessage name="password" />
                                 <FormErrorMessage>{errors.password}</FormErrorMessage>
                             </FormControl>
                             <Field

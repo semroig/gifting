@@ -42,5 +42,5 @@ const deleteSession = (SESSION_ID) => {
 }
 
 export default {
-  questions
+  questions, createAccount, createEmailSession, deleteSession
 }

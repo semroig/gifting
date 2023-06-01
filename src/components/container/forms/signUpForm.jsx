@@ -6,14 +6,22 @@ import {
   FormLabel,
   FormErrorMessage,
   Input,
-  VStack
+  VStack,
+  useToast
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
-// Need to use this on the onsubmit event
-// import { Link } from "react-router-dom";
+import { accountsService } from "services";
+
 
 const SignUpForm = () => {
+
+    const navigate = useNavigate();
+    const toast = useToast()
+
+    const [isLoading, setIsLoading] = useState(true);
 
     // Yup validations:
         // we need to add more (amount of chars in password...)
@@ -43,9 +51,27 @@ const SignUpForm = () => {
                     confirmation: ""
                 }}
                 onSubmit={(values) => {
-                    alert(JSON.stringify(values, null, 2));
+                    setIsLoading(true)
 
-                    // Redirect to Home
+                    accountsService.createAccount(values)
+                        .then(() => {
+                            console.info
+                            navigate("/quiz", { replace: true });
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            toast({
+                                position: 'top',
+                                title: 'Error creating your account.',
+                                description: "Description heree.",
+                                status: 'error',
+                                duration: 4000,
+                                isClosable: true,
+                            })
+                        })
+                        .finally(() => {
+                            setIsLoading(false)
+                        })
                 }}
                 validationSchema={ signUpSchema }
             >

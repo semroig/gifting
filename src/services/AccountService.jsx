@@ -3,24 +3,27 @@ import { appwriteClient } from "clients";
 
 export class AccountService {
 
-    async createAccount() {
+    async createAccount(body) {
 
-        const resp = await appwriteClient.createAccount();
+        // Deberia gestionar aca el tema de local storage del session id??
 
+        const resp = await appwriteClient.createAccount(body);
         return resp
     }
 
-    async createEmailSession() {
+    async createEmailSession(body) {
 
-        const resp = await appwriteClient.createEmailSession();
+        // Deberia gestionar aca el tema de local storage del session id??
 
+        const resp = await appwriteClient.createEmailSession(body);
         return resp
     }
 
     async deleteSession() {
 
-        const resp = await appwriteClient.deleteSession();
+        // Deberia gestionar aca el tema de local storage del session id?? -> eliminarlo
 
+        const resp = await appwriteClient.deleteSession();
         return resp
     }
 }
