@@ -1,57 +1,81 @@
-import { useState, useEffect } from 'react';
-import { Text, Button, Flex, Container, Heading } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Text, Button, Flex, Container } from "@chakra-ui/react";
 
 import { questionsService } from "services";
+import Stepper from "components/pure/stepper";
+
+const MAX_QUESTIONS = 3; // must be a prop
 
 const Questions = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [question, setQuestion] = useState(null);
+  const navigate = useNavigate();
 
-    // Counter state to track question number
-    const [count, setCount] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+  const [question, setQuestion] = useState(null);
+  const [questionsResponsed, setQuestionsResponsed] = useState([]);
 
-    const handleResponse = (event) => {
-        const response = event.target.value
-        console.log({response}) // do something with response
-        getRandomQuestion()
+  const handleResponse = (event) => {
+    const response = event.target.value;
+    const currResponses = questionsResponsed;
 
-        // Add +1 to counter (reflects on progress bar)
-        setCount((count) => count + 1);
+    if (response !== "skip") {
+      currResponses.push({
+        question: question,
+        response: response === "true",
+      });
+
+      setQuestionsResponsed(currResponses);
     }
 
-    const getRandomQuestion = async () => {
-        setIsLoading(true)
-
-        questionsService.getRandomQuestion()
-            .then(setQuestion)
-            .catch(console.error)
-            .finally(() => {
-                setIsLoading(false)
-            })
+    if (currResponses.length === MAX_QUESTIONS) {
+      return navigate("/quiz/results");
     }
 
-    useEffect(() => {
-        getRandomQuestion()
-    }, [])
+    const questionsIds = currResponses.map((response) => {
+      return response.question.$id;
+    });
 
-    if(isLoading) return <p>Loading...</p>
-    if(!question) return <p>No questions</p>
+    getRandomQuestion(questionsIds);
+  };
 
-    return (
-        <Container maxWidth="container.sm">
-            <Heading size="lg">Question number { count }</Heading>
+  const getRandomQuestion = (questionsIds = []) => {
+    setIsLoading(true);
 
-            <Text fontWeight="semibold" fontSize="xl" my={4}>
-                {question.Description}
-            </Text>
-            
-            <Flex flexDir="column" align="center" gap={2}>
-                <Button width="80px" value='yes' onClick={handleResponse}>Yes</Button>
-                <Button width="80px" value="no" onClick={handleResponse}>No</Button>
-                <Button width="80px" value="skip" onClick={handleResponse}>Skip</Button>
-            </Flex>
-        </Container>
-    );
-}
+    questionsService
+      .getRandomQuestion(questionsIds)
+      .then(setQuestion)
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  };
+
+  useEffect(() => {
+    getRandomQuestion();
+  }, []);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (!question) return <p>No questions</p>;
+
+  return (
+    <Container maxWidth="container.sm">
+      <Stepper step={questionsResponsed.length} max={MAX_QUESTIONS} mb={6} />
+
+      <Text fontWeight="semibold" fontSize="xl" my={4}>
+        {question.Description}
+      </Text>
+
+      <Flex flexDir="column" align="center" gap={2}>
+        <Button width="80px" value="yes" onClick={handleResponse}>
+          Yes
+        </Button>
+        <Button width="80px" value="no" onClick={handleResponse}>
+          No
+        </Button>
+        <Button width="80px" value="skip" onClick={handleResponse}>
+          Skip
+        </Button>
+      </Flex>
+    </Container>
+  );
+};
 
 export default Questions;
