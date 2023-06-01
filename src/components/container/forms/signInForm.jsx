@@ -1,4 +1,4 @@
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik, Field } from "formik";
 import {
   Box,
   Button,
@@ -45,7 +45,7 @@ const SignInForm = () => {
                 onSubmit={(values) => {
                     setIsLoading(true)
 
-                    accountsService.createAccount(values)
+                    accountsService.createEmailSession(values)
                         .then(() => {
                             console.info
                             navigate("/quiz", { replace: true });
@@ -54,8 +54,8 @@ const SignInForm = () => {
                             console.log(error);
                             toast({
                                 position: 'top',
-                                title: 'Error creating your account.',
-                                description: "Description heree.",
+                                title: 'Error logging into your account.',
+                                description: "Description hereee",
                                 status: 'error',
                                 duration: 4000,
                                 isClosable: true,
@@ -64,26 +64,21 @@ const SignInForm = () => {
                         .finally(() => {
                             setIsLoading(false)
                         })
-
-
-                    // Call createEmailSession service
-                    // Redirect to Home
                 }}
                 validationSchema={ loginSchema }
             >
                 {({ handleSubmit, errors, touched }) => (
                     <form onSubmit={handleSubmit}>
                         <VStack spacing={4} align="flex-start">
-                            <FormControl>
+                            <FormControl isInvalid={!!errors.email && touched.email}>
                                 <FormLabel htmlFor="email">Email Address</FormLabel>
                                 <Field
-                                as={Input}
-                                id="email"
-                                name="email"
-                                type="email"
-                                variant="filled"
+                                    as={Input}
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    variant="filled"
                                 />
-                                <ErrorMessage name="email" />
                                 <FormErrorMessage>{errors.email}</FormErrorMessage>
                             </FormControl>
                             <FormControl isInvalid={!!errors.password && touched.password}>
@@ -94,17 +89,7 @@ const SignInForm = () => {
                                 name="password"
                                 type="password"
                                 variant="filled"
-                                validate={(value) => {
-                                    let error;
-
-                                    if (value.length < 6) {
-                                    error = "Password must contain at least 6 characters";
-                                    }
-
-                                    return error;
-                                }}
                                 />
-                                <ErrorMessage name="password" />
                                 <FormErrorMessage>{errors.password}</FormErrorMessage>
                             </FormControl>
                             <Field
