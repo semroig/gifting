@@ -24,3 +24,7 @@ npm run dev
 //         Description: "prueba"
 //     }
 // );
+
+## Contributors
+
+[<img src="https://github.com/{{ semroig }}.png" width="60px;"/><br /><sub><ahref="https://github.com/{{ semroig }}">{{ semroig }}</a></sub>](https://github.com/{{ semroig }}/{{ gifting }}
