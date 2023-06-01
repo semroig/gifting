@@ -4,6 +4,12 @@ Gifting is a project built to participate into the [Appwrite + Hashnode Hackatho
 
 ## How to start the project?
 
+### Create Appwrite cloud project
+
+### Set environment variables
+
+### Run project local
+
 First, you need to install all dependencies and packages:
 
 ```bash
@@ -25,6 +31,10 @@ npm run dev
 //     }
 // );
 
-## Contributors
+## Features
 
-[<img src="https://github.com/{{ semroig }}.png" width="60px;"/><br /><sub><ahref="https://github.com/{{ semroig }}">{{ semroig }}</a></sub>](https://github.com/{{ semroig }}/{{ gifting }}
+## Publishing
+
+## Project structure
+
+## Contributors?
