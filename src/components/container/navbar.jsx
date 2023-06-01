@@ -9,6 +9,26 @@ export default function Navbar() {
   const [isAuth, setIsAuth] = useState(true);
 
   const handleSignOut = () => {
+
+    // Como puedo tener aca los datos del session id?? Local Storage?
+
+    // accountsService.deleteSession(values)
+    //   .then(() => {
+    //     setIsAuth(false);
+    //     navigate("/", { replace: true });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     toast({
+    //         position: 'top',
+    //         title: 'Error closing your session.',
+    //         description: "Description hereee",
+    //         status: 'error',
+    //         duration: 4000,
+    //         isClosable: true,
+    //     })
+    //   })
+
     setIsAuth(false);
     navigate("/", { replace: true });
   };
