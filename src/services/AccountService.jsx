@@ -3,24 +3,21 @@ import { appwriteClient } from "clients";
 
 export class AccountService {
 
-    async createAccount() {
+    async createAccount(body) {
 
-        const resp = await appwriteClient.createAccount();
-
+        const resp = await appwriteClient.createAccount(body);
         return resp
     }
 
-    async createEmailSession() {
+    async createEmailSession(body) {
 
-        const resp = await appwriteClient.createEmailSession();
-
+        const resp = await appwriteClient.createEmailSession(body);
         return resp
     }
 
     async deleteSession() {
 
         const resp = await appwriteClient.deleteSession();
-
         return resp
     }
 }

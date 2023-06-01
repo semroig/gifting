@@ -34,7 +34,7 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link to="/">Home</Link>
+                <Link to="/quiz">Home</Link>
                 <Link to="/quiz/questions">New quiz</Link>
                 <Link to="/quiz/history">History</Link>
                 <Button onClick={handleSignOut}>Sign out</Button>

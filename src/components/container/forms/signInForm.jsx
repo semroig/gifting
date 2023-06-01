@@ -1,4 +1,3 @@
-// Chakra + formik??
 import { Formik, Field, ErrorMessage } from "formik";
 import {
   Box,
@@ -8,15 +7,22 @@ import {
   FormLabel,
   FormErrorMessage,
   Input,
-  VStack
+  VStack,
+  useToast
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
-// Need to use this on the onsubmit event
-// import { Link } from "react-router-dom";
+import { accountsService } from "services";
 
 
 const SignInForm = () => {
+
+    const navigate = useNavigate();
+    const toast = useToast()
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const loginSchema = Yup.object().shape(
         {
@@ -37,7 +43,28 @@ const SignInForm = () => {
                     rememberMe: false
                 }}
                 onSubmit={(values) => {
-                    alert(JSON.stringify(values, null, 2));
+                    setIsLoading(true)
+
+                    accountsService.createAccount(values)
+                        .then(() => {
+                            console.info
+                            navigate("/quiz", { replace: true });
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            toast({
+                                position: 'top',
+                                title: 'Error creating your account.',
+                                description: "Description heree.",
+                                status: 'error',
+                                duration: 4000,
+                                isClosable: true,
+                            })
+                        })
+                        .finally(() => {
+                            setIsLoading(false)
+                        })
+
 
                     // Call createEmailSession service
                     // Redirect to Home
