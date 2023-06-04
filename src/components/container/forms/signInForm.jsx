@@ -8,107 +8,103 @@ import {
   FormErrorMessage,
   Input,
   VStack,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
-import * as Yup from 'yup';
-import { useState } from 'react';
+import * as Yup from "yup";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { accountsService } from "services";
 
-
 const SignInForm = () => {
+  const navigate = useNavigate();
+  const toast = useToast();
 
-    const navigate = useNavigate();
-    const toast = useToast()
+  const [isLoading, setIsLoading] = useState(true);
 
-    const [isLoading, setIsLoading] = useState(true);
+  const loginSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
 
-    const loginSchema = Yup.object().shape(
-        {
-            email: Yup.string()
-                    .email('Invalid email format')
-                    .required('Email is required'),
-            password: Yup.string()
-                    .required('Password is required')
-        }
-    );
+  return (
+    <Box bg="white" p={6} rounded="md" w={64}>
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+          rememberMe: false,
+        }}
+        onSubmit={(values) => {
+          setIsLoading(true);
 
-    return (
-        <Box bg="white" p={6} rounded="md" w={64}>
-            <Formik
-                initialValues={{
-                    email: "",
-                    password: "",
-                    rememberMe: false
-                }}
-                onSubmit={(values) => {
-                    setIsLoading(true)
-
-                    accountsService.createEmailSession(values)
-                        .then(() => {
-                            console.info
-                            navigate("/quiz", { replace: true });
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            toast({
-                                position: 'top',
-                                title: 'Error logging into your account.',
-                                description: "Description hereee",
-                                status: 'error',
-                                duration: 4000,
-                                isClosable: true,
-                            })
-                        })
-                        .finally(() => {
-                            setIsLoading(false)
-                        })
-                }}
-                validationSchema={ loginSchema }
-            >
-                {({ handleSubmit, errors, touched }) => (
-                    <form onSubmit={handleSubmit}>
-                        <VStack spacing={4} align="flex-start">
-                            <FormControl isInvalid={!!errors.email && touched.email}>
-                                <FormLabel htmlFor="email">Email Address</FormLabel>
-                                <Field
-                                    as={Input}
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    variant="filled"
-                                />
-                                <FormErrorMessage>{errors.email}</FormErrorMessage>
-                            </FormControl>
-                            <FormControl isInvalid={!!errors.password && touched.password}>
-                                <FormLabel htmlFor="password">Password</FormLabel>
-                                <Field
-                                as={Input}
-                                id="password"
-                                name="password"
-                                type="password"
-                                variant="filled"
-                                />
-                                <FormErrorMessage>{errors.password}</FormErrorMessage>
-                            </FormControl>
-                            <Field
-                                as={Checkbox}
-                                id="rememberMe"
-                                name="rememberMe"
-                                colorScheme="purple"
-                            >
-                                Remember me?
-                            </Field>
-                            <Button w="full" type="submit" mt="auto">
-                                Sign in
-                            </Button>
-                        </VStack>
-                    </form>
-                )}
-            </Formik>
-        </Box>
-    );
-}
+          accountsService
+            .createEmailSession(values)
+            .then(() => {
+              console.info;
+              navigate("/quiz", { replace: true });
+            })
+            .catch((error) => {
+              console.log(error);
+              toast({
+                position: "top",
+                title: "Error logging into your account.",
+                description: "Description hereee",
+                status: "error",
+                duration: 4000,
+                isClosable: true,
+              });
+            })
+            .finally(() => {
+              setIsLoading(false);
+            });
+        }}
+        validationSchema={loginSchema}
+      >
+        {({ handleSubmit, errors, touched }) => (
+          <form onSubmit={handleSubmit}>
+            <VStack spacing={4} align="flex-start">
+              <FormControl isInvalid={!!errors.email && touched.email}>
+                <FormLabel htmlFor="email">Email Address</FormLabel>
+                <Field
+                  as={Input}
+                  id="email"
+                  name="email"
+                  type="email"
+                  variant="filled"
+                />
+                <FormErrorMessage>{errors.email}</FormErrorMessage>
+              </FormControl>
+              <FormControl isInvalid={!!errors.password && touched.password}>
+                <FormLabel htmlFor="password">Password</FormLabel>
+                <Field
+                  as={Input}
+                  id="password"
+                  name="password"
+                  type="password"
+                  variant="filled"
+                />
+                <FormErrorMessage>{errors.password}</FormErrorMessage>
+              </FormControl>
+              <Field
+                as={Checkbox}
+                id="rememberMe"
+                name="rememberMe"
+                colorScheme="purple"
+              >
+                Remember me?
+              </Field>
+              <Button w="full" type="submit" mt="auto">
+                Sign in
+              </Button>
+            </VStack>
+          </form>
+        )}
+      </Formik>
+    </Box>
+  );
+};
 
 export default SignInForm;

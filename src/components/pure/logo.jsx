@@ -1,5 +1,3 @@
 export default function Logo() {
-  return (
-    <div>Gifting</div>
-  )
+  return <div>Gifting</div>;
 }

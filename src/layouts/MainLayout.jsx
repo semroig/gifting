@@ -7,15 +7,15 @@ import Footer from "components/container/footer";
 export default function MainLayout() {
   return (
     <Grid minH="100vh" flexDir="column" templateRows="auto 1fr auto">
-        <Navbar />
+      <Navbar />
 
-        <Container maxW="container.lg" h="100%">
-          <Outlet />
-        </Container>
+      <Container maxW="container.lg" h="100%">
+        <Outlet />
+      </Container>
 
-        <Box mt="auto">
-          <Footer />
-        </Box>
+      <Box mt="auto">
+        <Footer />
+      </Box>
     </Grid>
-  )
+  );
 }

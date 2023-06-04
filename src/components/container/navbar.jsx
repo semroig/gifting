@@ -9,7 +9,6 @@ export default function Navbar() {
   const [isAuth, setIsAuth] = useState(true);
 
   const handleSignOut = () => {
-
     // Como puedo tener aca los datos del session id?? Local Storage?
 
     // accountsService.deleteSession(values)

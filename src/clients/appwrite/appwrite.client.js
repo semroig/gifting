@@ -1,5 +1,5 @@
 import { Client, Databases, Account, ID } from "appwrite";
-import { appwriteConfig } from "config"
+import { appwriteConfig } from "config";
 
 const client = new Client();
 
@@ -16,31 +16,24 @@ const questions = (queries) => {
     appwriteConfig.QUESTION_COLLECTION_ID,
     queries && [queries]
   );
-}
+};
 
 // Revisar docu de Create Email Verification
 const createAccount = (body) => {
-  return account.create(
-    ID.unique(),
-    body.email,
-    body.password,
-    body.name
-  );
-}
+  return account.create(ID.unique(), body.email, body.password, body.name);
+};
 
 const createEmailSession = (body) => {
-  return account.createEmailSession(
-    body.email,
-    body.password
-  );
-}
+  return account.createEmailSession(body.email, body.password);
+};
 
 const deleteSession = (SESSION_ID) => {
-  return account.deleteSession(
-    SESSION_ID
-  );
-}
+  return account.deleteSession(SESSION_ID);
+};
 
 export default {
-  questions, createAccount, createEmailSession, deleteSession
-}
+  questions,
+  createAccount,
+  createEmailSession,
+  deleteSession,
+};

@@ -1,1 +1,1 @@
-export * as appwriteConfig from "./appwrite.config"
+export * as appwriteConfig from "./appwrite.config";
