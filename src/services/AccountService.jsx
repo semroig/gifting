@@ -1,29 +1,24 @@
 import { appwriteClient } from "clients";
 
-
 export class AccountService {
+  async createAccount(body) {
+    // Deberia gestionar aca el tema de local storage del session id??
 
-    async createAccount(body) {
+    const resp = await appwriteClient.createAccount(body);
+    return resp;
+  }
 
-        // Deberia gestionar aca el tema de local storage del session id??
+  async createEmailSession(body) {
+    // Deberia gestionar aca el tema de local storage del session id??
 
-        const resp = await appwriteClient.createAccount(body);
-        return resp
-    }
+    const resp = await appwriteClient.createEmailSession(body);
+    return resp;
+  }
 
-    async createEmailSession(body) {
+  async deleteSession() {
+    // Deberia gestionar aca el tema de local storage del session id?? -> eliminarlo
 
-        // Deberia gestionar aca el tema de local storage del session id??
-
-        const resp = await appwriteClient.createEmailSession(body);
-        return resp
-    }
-
-    async deleteSession() {
-
-        // Deberia gestionar aca el tema de local storage del session id?? -> eliminarlo
-
-        const resp = await appwriteClient.deleteSession();
-        return resp
-    }
+    const resp = await appwriteClient.deleteSession();
+    return resp;
+  }
 }

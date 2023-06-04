@@ -12,27 +12,26 @@ import QuizPage from "pages/quiz/QuizPage";
 import ResultsPage from "pages/results/ResultsPage";
 import HistoryPage from "pages/history/HistoryPage";
 
-
 export default function MainRouter() {
   return (
     <BrowserRouter>
-        <Routes>
-            <Route path="/signin" element={<SigInPage/>} />
-            <Route path="/signup" element={<SignUpPage/>} />
+      <Routes>
+        <Route path="/signin" element={<SigInPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
 
-            <Route path="/" element={<MainLayout />}>
-              <Route index element={<LandingPage />} />
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<LandingPage />} />
 
-              <Route path="/quiz" element={<Outlet />}>
-                <Route index element={<HomePage />} />
-                <Route path="questions" element={<QuizPage />} /> 
-                <Route path="results" element={<ResultsPage />} />
-                <Route path="history" element={<HistoryPage />} />
-              </Route>
-            </Route>
+          <Route path="/quiz" element={<Outlet />}>
+            <Route index element={<HomePage />} />
+            <Route path="questions" element={<QuizPage />} />
+            <Route path="results" element={<ResultsPage />} />
+            <Route path="history" element={<HistoryPage />} />
+          </Route>
+        </Route>
 
-            <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </BrowserRouter>
-  )
+  );
 }

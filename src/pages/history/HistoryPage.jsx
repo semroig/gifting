@@ -1,9 +1,9 @@
 const HistoryPage = () => {
-    return (
-        <div>
-            <p>History</p>
-        </div>
-    );
-}
+  return (
+    <div>
+      <p>History</p>
+    </div>
+  );
+};
 
 export default HistoryPage;

@@ -1,9 +1,7 @@
 import { MainRouter } from "router";
-import { ChakraProvider, extendTheme } from '@chakra-ui/react'
-
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 function App() {
-
   const theme = extendTheme({
     colors: {
       text: "#020508",
@@ -13,9 +11,9 @@ function App() {
         soft: "#1a202c",
       },
       secondary: "#EAF3FA",
-      accent: "#704219"
+      accent: "#704219",
     },
-  })
+  });
 
   return (
     <>
@@ -23,7 +21,7 @@ function App() {
         <MainRouter />
       </ChakraProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

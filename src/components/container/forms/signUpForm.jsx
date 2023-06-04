@@ -7,130 +7,125 @@ import {
   FormErrorMessage,
   Input,
   VStack,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
-import * as Yup from 'yup';
-import { useState } from 'react';
+import * as Yup from "yup";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { accountsService } from "services";
 
-
 const SignUpForm = () => {
+  const navigate = useNavigate();
+  const toast = useToast();
 
-    const navigate = useNavigate();
-    const toast = useToast()
+  const [isLoading, setIsLoading] = useState(true);
 
-    const [isLoading, setIsLoading] = useState(true);
+  // Yup validations:
+  // we need to add more (amount of chars in password...)
+  const signUpSchema = Yup.object().shape({
+    name: Yup.string().required("Name is required"),
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
+    confirmation: Yup.string()
+      .oneOf([Yup.ref("password")], "Passwords must match")
+      .required("Password confirmation is required"),
+  });
 
-    // Yup validations:
-        // we need to add more (amount of chars in password...)
-    const signUpSchema = Yup.object().shape(
-        {
-            name: Yup.string()
-                    .required('Name is required'),
-            email: Yup.string()
-                    .email('Invalid email format')
-                    .required('Email is required'),
-            password: Yup.string()
-                    .required('Password is required'),
-            confirmation: Yup.string()
-                    .oneOf(
-                        [Yup.ref("password")],
-                        "Passwords must match"
-                    ).required('Password confirmation is required')
-        }
-    );
+  return (
+    <Box bg="white" p={6} rounded="md" w={64}>
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+          confirmation: "",
+        }}
+        onSubmit={(values) => {
+          setIsLoading(true);
 
-    return (
-        <Box bg="white" p={6} rounded="md" w={64}>
-            <Formik
-                initialValues={{
-                    email: "",
-                    password: "",
-                    confirmation: ""
-                }}
-                onSubmit={(values) => {
-                    setIsLoading(true)
-
-                    accountsService.createAccount(values)
-                        .then(() => {
-                            console.info
-                            navigate("/quiz", { replace: true });
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            toast({
-                                position: 'top',
-                                title: 'Error creating your account.',
-                                description: "Description heree.",
-                                status: 'error',
-                                duration: 4000,
-                                isClosable: true,
-                            })
-                        })
-                        .finally(() => {
-                            setIsLoading(false)
-                        })
-                }}
-                validationSchema={ signUpSchema }
-            >
-                {({ handleSubmit, errors, touched }) => (
-                    <form onSubmit={handleSubmit}>
-                        <VStack spacing={4} align="flex-start">
-                            <FormControl isInvalid={!!errors.name && touched.name}>
-                                <FormLabel htmlFor="name">First name</FormLabel>
-                                <Field
-                                    as={Input}
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    variant="filled"
-                                />
-                                <FormErrorMessage>{errors.name}</FormErrorMessage>
-                            </FormControl>
-                            <FormControl isInvalid={!!errors.email && touched.email}>
-                                <FormLabel htmlFor="email">Email</FormLabel>
-                                <Field
-                                    as={Input}
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    variant="filled"
-                                />
-                                <FormErrorMessage>{errors.email}</FormErrorMessage>
-                            </FormControl>
-                            <FormControl isInvalid={!!errors.password && touched.password}>
-                                <FormLabel htmlFor="password">Password</FormLabel>
-                                <Field
-                                    as={Input}
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    variant="filled"
-                                />
-                                <FormErrorMessage>{errors.password}</FormErrorMessage>
-                            </FormControl>
-                            <FormControl isInvalid={!!errors.confirmation && touched.confirmation}>
-                                <FormLabel htmlFor="confirmation">Repeat password</FormLabel>
-                                <Field
-                                    as={Input}
-                                    id="confirmation"
-                                    name="confirmation"
-                                    type="password"
-                                    variant="filled"
-                                />
-                                <FormErrorMessage>{errors.confirmation}</FormErrorMessage>
-                            </FormControl>
-                            <Button w="full" type="submit" mt="auto">
-                                Sign up
-                            </Button>
-                        </VStack>
-                    </form>
-                )}
-            </Formik>
-        </Box>
-    );
-}
+          accountsService
+            .createAccount(values)
+            .then(() => {
+              console.info;
+              navigate("/quiz", { replace: true });
+            })
+            .catch((error) => {
+              console.log(error);
+              toast({
+                position: "top",
+                title: "Error creating your account.",
+                description: "Description heree.",
+                status: "error",
+                duration: 4000,
+                isClosable: true,
+              });
+            })
+            .finally(() => {
+              setIsLoading(false);
+            });
+        }}
+        validationSchema={signUpSchema}
+      >
+        {({ handleSubmit, errors, touched }) => (
+          <form onSubmit={handleSubmit}>
+            <VStack spacing={4} align="flex-start">
+              <FormControl isInvalid={!!errors.name && touched.name}>
+                <FormLabel htmlFor="name">First name</FormLabel>
+                <Field
+                  as={Input}
+                  id="name"
+                  name="name"
+                  type="text"
+                  variant="filled"
+                />
+                <FormErrorMessage>{errors.name}</FormErrorMessage>
+              </FormControl>
+              <FormControl isInvalid={!!errors.email && touched.email}>
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <Field
+                  as={Input}
+                  id="email"
+                  name="email"
+                  type="email"
+                  variant="filled"
+                />
+                <FormErrorMessage>{errors.email}</FormErrorMessage>
+              </FormControl>
+              <FormControl isInvalid={!!errors.password && touched.password}>
+                <FormLabel htmlFor="password">Password</FormLabel>
+                <Field
+                  as={Input}
+                  id="password"
+                  name="password"
+                  type="password"
+                  variant="filled"
+                />
+                <FormErrorMessage>{errors.password}</FormErrorMessage>
+              </FormControl>
+              <FormControl
+                isInvalid={!!errors.confirmation && touched.confirmation}
+              >
+                <FormLabel htmlFor="confirmation">Repeat password</FormLabel>
+                <Field
+                  as={Input}
+                  id="confirmation"
+                  name="confirmation"
+                  type="password"
+                  variant="filled"
+                />
+                <FormErrorMessage>{errors.confirmation}</FormErrorMessage>
+              </FormControl>
+              <Button w="full" type="submit" mt="auto">
+                Sign up
+              </Button>
+            </VStack>
+          </form>
+        )}
+      </Formik>
+    </Box>
+  );
+};
 
 export default SignUpForm;
