@@ -48,7 +48,13 @@ def main(req, res):
       .set_key(req.variables.get('APPWRITE_FUNCTION_API_KEY', None))
       .set_self_signed(True)
     )
-  
+
+  # Write logic here
+  payload = req.payload or 'No payload provided. Add custom data when executing function.'
+  eventData = req.variables.get('APPWRITE_FUNCTION_EVENT_DATA')
+  print("payload", payload)
+  print("eventData", eventData)
+
   return res.json({
     "areDevelopersAwesome": True,
   })
