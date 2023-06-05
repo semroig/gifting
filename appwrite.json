@@ -1,0 +1,20 @@
+{
+    "projectId": "646be96ac195499e31c0",
+    "projectName": "gifting",
+    "functions": [
+        {
+            "$id": "647de011e1157aef3ac9",
+            "name": "Results algorithm",
+            "runtime": "python-3.9",
+            "path": "functions/Results algorithm",
+            "entrypoint": "src/index.py",
+            "ignore": [
+                "__pypackages__"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        }
+    ]
+}
