@@ -24,8 +24,14 @@ from appwrite.services.users import Users
   If an error is thrown, a response with code 500 will be returned.
 """
 
+
 def main(req, res):
+
+  """Initialize the Appwrite client"""
   client = Client()
+  client.set_endpoint(req.variables.get("APPWRITE_ENDPOINT"))
+  client.set_project(req.variables.get("APPWRITE_FUNCTION_PROJECT_ID"))
+  client.set_key(req.variables.get("APPWRITE_API_KEY"))
 
   # You can remove services you don't use
   account = Account(client)
@@ -38,22 +44,16 @@ def main(req, res):
   teams = Teams(client)
   users = Users(client)
 
-  if not req.variables.get('APPWRITE_FUNCTION_ENDPOINT') or not req.variables.get('APPWRITE_FUNCTION_API_KEY'):
-    print('Environment variables are not set. Function cannot use Appwrite SDK.')
-  else:
-    (
-    client
-      .set_endpoint(req.variables.get('APPWRITE_FUNCTION_ENDPOINT', None))
-      .set_project(req.variables.get('APPWRITE_FUNCTION_PROJECT_ID', None))
-      .set_key(req.variables.get('APPWRITE_FUNCTION_API_KEY', None))
-      .set_self_signed(True)
-    )
-
   # Write logic here!
   payload = req.payload or 'No payload provided. Add custom data when executing function.'
   eventData = req.variables.get('APPWRITE_FUNCTION_EVENT_DATA')
   print("payload", payload)
   print("eventData", eventData)
+
+  result = database.list_documents(
+    req.variables.get("DATABASE_ID"), req.variables.get("QUESTIONS_COLLECTION_ID")
+  )
+  print('result', result)
 
   return res.json({
     "areDevelopersAwesome": True,
