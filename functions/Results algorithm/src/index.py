@@ -11,18 +11,7 @@ from appwrite.services.storage import Storage
 from appwrite.services.teams import Teams
 from appwrite.services.users import Users
 
-"""
-  'req' variable has:
-    'headers' - object with request headers
-    'payload' - request body data as a string
-    'variables' - object with function variables
-
-  'res' variable has:
-    'send(text, status)' - function to return text response. Status code defaults to 200
-    'json(obj, status)' - function to return JSON response. Status code defaults to 200
-
-  If an error is thrown, a response with code 500 will be returned.
-"""
+import json
 
 
 def main(req, res):
@@ -45,34 +34,52 @@ def main(req, res):
   users = Users(client)
 
   # Write logic here!
-  eventData = req.variables.get('APPWRITE_FUNCTION_EVENT_DATA')
+  eventData = req.variables.get('APPWRITE_FUNCTION_EVENT_DATA') or None
   print("eventData", eventData)
-  
+
   # filter context (needs to be on quiz record creation)
+  if eventData:
+    # Turn str into dict
+    eventData = json.loads(eventData)
+    if eventData['$collectionId'] != req.variables.get("QUIZES_COLLECTION_ID"):
+      return res.json({
+        "wasEventContext": True,
+        "wasQuizCollection": False
+      })
 
-  try:
+    # Everything else
+    try:
+      
+      # Retrieve all products available
+      result = database.list_documents(
+        req.variables.get("DATABASE_ID"),
+        req.variables.get("PRODUCTS_COLLECTION_ID")
+      )
 
-    # Retrieve all products available
-    result = database.list_documents(
-      req.variables.get("DATABASE_ID"),
-      req.variables.get("PRODUCTS_COLLECTION_ID")
-    )
+      # Iterate trought records and append to list
+      posibles = set()
+      for document in result['documents']:
+        if eventData['YesCategories']:
 
-    # Iterate trought records and append to list posibles
-    posibles = []
-    for document in result['documents']:
-      print(document['Category'])
+          for quizCategory in eventData['YesCategories']:
+            if quizCategory in document['Category']:
+              posibles.add(document['Description'])
 
-      if 'Tech' in document['Category']:
-        posibles.append(document['Description'])
-    
-    print('posibles', posibles)
+      # Falta eliminar los que no
 
-    #  Update Quiz record with 3 product ids
-  
-  except Exception as e:
-    print('error', e)
+      # Falta entregar 3 elementos random de los posibles
+      
+      print('posibles', posibles)
 
+    except Exception as e:
+      print('error', e)
+
+    return res.json({
+      "wasEventContext": True,
+      "wasQuizCollection": True
+    })
+
+  # Return dif event context
   return res.json({
-    "areDevelopersAwesome": True,
+    "wasEventContext": False,
   })
