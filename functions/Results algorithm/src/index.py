@@ -45,13 +45,14 @@ def main(req, res):
   users = Users(client)
 
   # Write logic here!
-  payload = req.payload or 'No payload provided. Add custom data when executing function.'
   eventData = req.variables.get('APPWRITE_FUNCTION_EVENT_DATA')
-  print("payload", payload)
   print("eventData", eventData)
 
+  # Set the filters for the query
+  filters = ['Category:array_contains=Tech']
+
   result = database.list_documents(
-    req.variables.get("DATABASE_ID"), req.variables.get("QUESTIONS_COLLECTION_ID")
+    req.variables.get("DATABASE_ID"), req.variables.get("PRODUCTS_COLLECTION_ID", filters=filters)
   )
   print('result', result)
 
