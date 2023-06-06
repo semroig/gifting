@@ -11,8 +11,8 @@
             "ignore": [
                 "__pypackages__"
             ],
-            "execute": [],
-            "events": [],
+            "execute": ["any"],
+            "events": ["databases.*.collections.*.documents.*.create"],
             "schedule": "",
             "timeout": 15
         }
