@@ -47,18 +47,30 @@ def main(req, res):
   # Write logic here!
   eventData = req.variables.get('APPWRITE_FUNCTION_EVENT_DATA')
   print("eventData", eventData)
+  
+  # filter context (needs to be on quiz record creation)
 
   try:
 
-    # Set the filters for the query
-    filters = ['Category:array_contains=Tech']
-
+    # Retrieve all products available
     result = database.list_documents(
-      req.variables.get("DATABASE_ID"), req.variables.get("PRODUCTS_COLLECTION_ID", queries=filters)
+      req.variables.get("DATABASE_ID"),
+      req.variables.get("PRODUCTS_COLLECTION_ID")
     )
-    print('result', result)
+
+    # Iterate trought records and append to list posibles
+    posibles = []
+    for document in result['documents']:
+      print(document['Category'])
+
+      if 'Tech' in document['Category']:
+        posibles.append(document['Description'])
+    
+    print('posibles', posibles)
+
+    #  Update Quiz record with 3 product ids
   
-  except as e:
+  except Exception as e:
     print('error', e)
 
   return res.json({
