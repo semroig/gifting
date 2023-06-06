@@ -48,13 +48,18 @@ def main(req, res):
   eventData = req.variables.get('APPWRITE_FUNCTION_EVENT_DATA')
   print("eventData", eventData)
 
-  # Set the filters for the query
-  filters = ['Category:array_contains=Tech']
+  try:
 
-  result = database.list_documents(
-    req.variables.get("DATABASE_ID"), req.variables.get("PRODUCTS_COLLECTION_ID", filters=filters)
-  )
-  print('result', result)
+    # Set the filters for the query
+    filters = ['Category:array_contains=Tech']
+
+    result = database.list_documents(
+      req.variables.get("DATABASE_ID"), req.variables.get("PRODUCTS_COLLECTION_ID", queries=filters)
+    )
+    print('result', result)
+  
+  except as e:
+    print('error', e)
 
   return res.json({
     "areDevelopersAwesome": True,
