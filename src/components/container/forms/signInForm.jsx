@@ -42,8 +42,12 @@ const SignInForm = () => {
 
           accountsService
             .createEmailSession(values)
-            .then(() => {
-              console.info;
+            .then((resp) => {
+
+              // Save session id on session storage
+              sessionStorage.setItem("name", resp.providerUid);
+              sessionStorage.setItem("sessionId", resp.$id);
+
               navigate("/quiz", { replace: true });
             })
             .catch((error) => {

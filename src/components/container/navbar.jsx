@@ -3,33 +3,36 @@ import { Link, useNavigate } from "react-router-dom";
 import { Box, Container, Flex, Button } from "@chakra-ui/react";
 
 import Logo from "components/pure/logo";
+import { accountsService } from "services";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(true);
 
   const handleSignOut = () => {
-    // Como puedo tener aca los datos del session id?? Local Storage?
 
-    // accountsService.deleteSession(values)
-    //   .then(() => {
-    //     setIsAuth(false);
-    //     navigate("/", { replace: true });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     toast({
-    //         position: 'top',
-    //         title: 'Error closing your session.',
-    //         description: "Description hereee",
-    //         status: 'error',
-    //         duration: 4000,
-    //         isClosable: true,
-    //     })
-    //   })
+    // Call de service to logout from Appwrite server session
+    accountsService.deleteSession()
+      .then(() => {
+        setIsAuth(false);
 
-    setIsAuth(false);
-    navigate("/", { replace: true });
+        // Delete saved credentials locally
+        sessionStorage.removeItem("name");
+        sessionStorage.removeItem("sessionId");
+
+        navigate("/", { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast({
+            position: 'top',
+            title: 'Error closing your session.',
+            description: "Description hereee",
+            status: 'error',
+            duration: 4000,
+            isClosable: true,
+        })
+      })
   };
 
   return (

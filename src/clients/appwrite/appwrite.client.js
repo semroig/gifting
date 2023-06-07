@@ -27,8 +27,8 @@ const createEmailSession = (body) => {
   return account.createEmailSession(body.email, body.password);
 };
 
-const deleteSession = (SESSION_ID) => {
-  return account.deleteSession(SESSION_ID);
+const deleteSession = () => {
+  return account.deleteSession(sessionStorage.getItem("sessionId"));
 };
 
 export default {
