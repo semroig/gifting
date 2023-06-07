@@ -1,6 +1,4 @@
 from appwrite.client import Client
-
-# You can remove imports of services you don't use
 from appwrite.services.account import Account
 from appwrite.services.avatars import Avatars
 from appwrite.services.databases import Databases
@@ -12,6 +10,7 @@ from appwrite.services.teams import Teams
 from appwrite.services.users import Users
 
 import json
+import random
 
 
 def main(req, res):
@@ -22,7 +21,6 @@ def main(req, res):
   client.set_project(req.variables.get("APPWRITE_FUNCTION_PROJECT_ID"))
   client.set_key(req.variables.get("APPWRITE_API_KEY"))
 
-  # You can remove services you don't use
   account = Account(client)
   avatars = Avatars(client)
   database = Databases(client)
@@ -33,13 +31,11 @@ def main(req, res):
   teams = Teams(client)
   users = Users(client)
 
-  # Write logic here!
   eventData = req.variables.get('APPWRITE_FUNCTION_EVENT_DATA') or None
   print("eventData", eventData)
 
   # filter context (needs to be on quiz record creation)
   if eventData:
-    # Turn str into dict
     eventData = json.loads(eventData)
     if eventData['$collectionId'] != req.variables.get("QUIZES_COLLECTION_ID"):
       return res.json({
@@ -47,7 +43,6 @@ def main(req, res):
         "wasQuizCollection": False
       })
 
-    # Everything else
     try:
       
       # Retrieve all products available
@@ -59,15 +54,29 @@ def main(req, res):
       # Iterate trought records and append to list
       posibles = set()
       for document in result['documents']:
+        isGoodFit = False
+
+        # the 'yes' categories
         if eventData['YesCategories']:
-
           for quizCategory in eventData['YesCategories']:
+            if quizCategory in document['Category'] or 'General' in document['Category']:
+              isGoodFit = True
+
+        # the 'no' categories
+        if eventData['NoCategories']:
+          for quizCategory in eventData['NoCategories']:
             if quizCategory in document['Category']:
-              posibles.add(document['Description'])
+              isGoodFit = False
+        
+        if isGoodFit == True:
+          posibles.add(document['Description'])
 
-      # Falta eliminar los que no
-
-      # Falta entregar 3 elementos random de los posibles
+      # Reduce the list into 3 random elements
+      posibles = list(posibles)
+      for i in range(len(posibles) - 3):
+        del posibles[random.randint(0,len(posibles) - 1)]
+      
+      # update quiz record adding prod ids
       
       print('posibles', posibles)
 
