@@ -16,6 +16,7 @@ const Questions = () => {
 
   const handleResponse = (event) => {
     const response = event.target.value;
+
     const currResponses = questionsResponsed;
 
     if (response !== "skip") {

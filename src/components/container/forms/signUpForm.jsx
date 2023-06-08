@@ -48,11 +48,10 @@ const SignUpForm = () => {
           accountsService
             .createAccount(values)
             .then((resp) => {
-
               // Save session id on session storage
               sessionStorage.setItem("name", resp.name);
               sessionStorage.setItem("sessionId", resp.$id);
-              
+
               navigate("/quiz", { replace: true });
             })
             .catch((error) => {

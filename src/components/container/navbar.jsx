@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Container, Flex, Button } from "@chakra-ui/react";
+import { Box, Container, Flex, Button, useToast } from "@chakra-ui/react";
 
 import Logo from "components/pure/logo";
 import { accountsService } from "services";
@@ -8,11 +8,12 @@ import { accountsService } from "services";
 export default function Navbar() {
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(true);
+  const toast = useToast();
 
   const handleSignOut = () => {
-
     // Call de service to logout from Appwrite server session
-    accountsService.deleteSession()
+    accountsService
+      .deleteSession()
       .then(() => {
         setIsAuth(false);
 
@@ -25,14 +26,14 @@ export default function Navbar() {
       .catch((error) => {
         console.log(error);
         toast({
-            position: 'top',
-            title: 'Error closing your session.',
-            description: "Description hereee",
-            status: 'error',
-            duration: 4000,
-            isClosable: true,
-        })
-      })
+          position: "top",
+          title: "Error closing your session.",
+          description: "Description hereee",
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      });
   };
 
   return (
