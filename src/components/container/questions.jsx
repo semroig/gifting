@@ -66,13 +66,28 @@ const Questions = ({ initialData }) => {
       </Text>
 
       <Flex flexDir="column" align="center" gap={2}>
-        <Button width="80px" value="yes" onClick={handleResponse}>
+        <Button
+          width="80px"
+          value="yes"
+          onClick={handleResponse}
+          variant="secondary"
+        >
           Yes
         </Button>
-        <Button width="80px" value="no" onClick={handleResponse}>
+        <Button
+          width="80px"
+          value="no"
+          onClick={handleResponse}
+          variant="secondary"
+        >
           No
         </Button>
-        <Button width="80px" value="skip" onClick={handleResponse}>
+        <Button
+          width="80px"
+          value="skip"
+          onClick={handleResponse}
+          variant="secondary"
+        >
           Skip
         </Button>
       </Flex>

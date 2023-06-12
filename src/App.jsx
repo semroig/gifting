@@ -7,13 +7,40 @@ function App() {
       text: "#020508",
       background: "#FFFFFF",
       primary: {
-        all: "#C3732C",
+        strong: "#C3732C",
         soft: "#F9F1EA",
       },
       secondary: "#EAF3FA",
       accent: "#704219",
     },
+    components: {
+      Button: {
+        // 3. We can add a new visual variant
+        variants: {
+          primary: {
+            bg: "primary.strong",
+            color: "background",
+          },
+          secondary: {
+            bg: "secondary",
+            color: "text",
+          },
+          accent: {
+            bg: "accent",
+            color: "background",
+          },
+        },
+      },
+    },
   });
+
+  // Custom color theme
+  // primary full Orange 400
+  // primary soft Orange 50
+  // text Gray 900
+  // background White
+  // secondary Blue 50
+  // accent Yellow 800
 
   return (
     <>

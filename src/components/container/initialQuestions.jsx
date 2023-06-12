@@ -68,7 +68,7 @@ const InitialQuestions = ({ next }) => {
                 ></Field>
                 <FormErrorMessage>{errors.gender}</FormErrorMessage>
               </FormControl>
-              <Button w="full" type="submit" mt="auto" colorScheme="text">
+              <Button w="full" type="submit" mt="auto" variant="secondary">
                 Start the quiz
               </Button>
             </VStack>

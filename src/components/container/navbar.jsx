@@ -37,7 +37,7 @@ export default function Navbar() {
   };
 
   return (
-    <Box as="nav" bgColor="gray.50">
+    <Box as="nav" bgColor="primary.soft">
       <Container maxW="container.lg" py={4}>
         <Flex justifyContent="space-between" alignItems="center">
           <Link to="/">
@@ -47,11 +47,11 @@ export default function Navbar() {
           <Flex gap={4} alignItems="center" fontWeight="semibold">
             {!isAuth ? (
               <>
-                <Button as={Link} to="/signin">
+                <Button as={Link} to="/signin" variant="primary">
                   Sign in
                 </Button>
 
-                <Button as={Link} to="/signup">
+                <Button as={Link} to="/signup" variant="accent">
                   Sign up
                 </Button>
               </>
@@ -60,7 +60,9 @@ export default function Navbar() {
                 <Link to="/quiz">Home</Link>
                 <Link to="/quiz/questions">New quiz</Link>
                 <Link to="/quiz/history">History</Link>
-                <Button onClick={handleSignOut}>Sign out</Button>
+                <Button onClick={handleSignOut} variant="primary">
+                  Sign out
+                </Button>
               </>
             )}
           </Flex>
