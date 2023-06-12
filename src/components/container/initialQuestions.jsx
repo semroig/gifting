@@ -9,8 +9,9 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
+import PropTypes from "prop-types";
 
-const InitialQuestions = () => {
+const InitialQuestions = ({ next }) => {
   const quizDataSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     age: Yup.string(),
@@ -25,9 +26,9 @@ const InitialQuestions = () => {
           age: "",
           gender: "",
         }}
-        onSubmit={() => {
-          // TO DO
-          console.log("do something");
+        onSubmit={(values) => {
+          // Call function on father component
+          next(values);
         }}
         validationSchema={quizDataSchema}
       >
@@ -76,6 +77,10 @@ const InitialQuestions = () => {
       </Formik>
     </Box>
   );
+};
+
+InitialQuestions.propTypes = {
+  next: PropTypes.func.isRequired,
 };
 
 export default InitialQuestions;

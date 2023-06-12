@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Text, Button, Flex, Container } from "@chakra-ui/react";
+import PropTypes from "prop-types";
 
 import { questionsService } from "services";
 import Stepper from "components/pure/stepper";
 
 const MAX_QUESTIONS = 3; // must be a prop
 
-const Questions = () => {
+const Questions = ({ initialData }) => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -77,6 +78,10 @@ const Questions = () => {
       </Flex>
     </Container>
   );
+};
+
+Questions.propTypes = {
+  initialData: PropTypes.isRequired,
 };
 
 export default Questions;
