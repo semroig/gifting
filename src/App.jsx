@@ -8,7 +8,7 @@ function App() {
       background: "#FFFFFF",
       primary: {
         all: "#C3732C",
-        soft: "#1a202c",
+        soft: "#F9F1EA",
       },
       secondary: "#EAF3FA",
       accent: "#704219",
