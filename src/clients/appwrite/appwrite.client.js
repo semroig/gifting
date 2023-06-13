@@ -31,9 +31,18 @@ const deleteSession = () => {
   return account.deleteSession(sessionStorage.getItem("sessionId"));
 };
 
+const quizes = (queries) => {
+  return databases.listDocuments(
+    appwriteConfig.GIFTING_DB_ID,
+    appwriteConfig.QUIZ_COLLECTION_ID,
+    queries && [queries]
+  );
+};
+
 export default {
   questions,
   createAccount,
   createEmailSession,
   deleteSession,
+  quizes,
 };

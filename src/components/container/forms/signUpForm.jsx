@@ -120,7 +120,7 @@ const SignUpForm = () => {
                 />
                 <FormErrorMessage>{errors.confirmation}</FormErrorMessage>
               </FormControl>
-              <Button w="full" type="submit" mt="auto">
+              <Button w="full" type="submit" mt="auto" variant="primary">
                 Sign up
               </Button>
             </VStack>

@@ -97,9 +97,9 @@ const SignInForm = () => {
                 name="rememberMe"
                 colorScheme="purple"
               >
-                Remember me?
+                Remember me
               </Field>
-              <Button w="full" type="submit" mt="auto">
+              <Button w="full" type="submit" mt="auto" variant="primary">
                 Sign in
               </Button>
             </VStack>
