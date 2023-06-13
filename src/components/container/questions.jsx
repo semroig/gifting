@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Text, Button, Flex, Container } from "@chakra-ui/react";
+import { Text, Button, Flex, Container, Stack } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
 import { questionsService } from "services";
@@ -58,39 +58,41 @@ const Questions = ({ initialData }) => {
   if (!question) return <p>No questions</p>;
 
   return (
-    <Container maxWidth="container.sm">
+    <Container mt={20} maxWidth="container.sm">
       <Stepper step={questionsResponsed.length} max={MAX_QUESTIONS} mb={6} />
 
       <Text fontWeight="semibold" fontSize="xl" my={4}>
         {question.Description}
       </Text>
 
-      <Flex flexDir="column" align="center" gap={2}>
-        <Button
-          width="80px"
-          value="yes"
-          onClick={handleResponse}
-          variant="secondary"
-        >
-          Yes
-        </Button>
-        <Button
-          width="80px"
-          value="no"
-          onClick={handleResponse}
-          variant="secondary"
-        >
-          No
-        </Button>
-        <Button
-          width="80px"
-          value="skip"
-          onClick={handleResponse}
-          variant="secondary"
-        >
-          Skip
-        </Button>
-      </Flex>
+      <Container>
+        <Stack direction="row" align="stretch">
+          <Button
+            width="80px"
+            value="yes"
+            onClick={handleResponse}
+            variant="secondary"
+          >
+            Yes
+          </Button>
+          <Button
+            width="80px"
+            value="no"
+            onClick={handleResponse}
+            variant="secondary"
+          >
+            No
+          </Button>
+          <Button
+            width="80px"
+            value="skip"
+            onClick={handleResponse}
+            variant="secondary"
+          >
+            Skip
+          </Button>
+        </Stack>
+      </Container>
     </Container>
   );
 };

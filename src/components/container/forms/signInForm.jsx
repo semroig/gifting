@@ -69,7 +69,10 @@ const SignInForm = () => {
         {({ handleSubmit, errors, touched }) => (
           <form onSubmit={handleSubmit}>
             <VStack spacing={4} align="flex-start">
-              <FormControl isInvalid={!!errors.email && touched.email}>
+              <FormControl
+                isInvalid={!!errors.email && touched.email}
+                isRequired
+              >
                 <FormLabel htmlFor="email">Email Address</FormLabel>
                 <Field
                   as={Input}
@@ -80,7 +83,10 @@ const SignInForm = () => {
                 />
                 <FormErrorMessage>{errors.email}</FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={!!errors.password && touched.password}>
+              <FormControl
+                isInvalid={!!errors.password && touched.password}
+                isRequired
+              >
                 <FormLabel htmlFor="password">Password</FormLabel>
                 <Field
                   as={Input}

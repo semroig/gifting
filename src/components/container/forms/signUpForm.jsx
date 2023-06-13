@@ -74,7 +74,7 @@ const SignUpForm = () => {
         {({ handleSubmit, errors, touched }) => (
           <form onSubmit={handleSubmit}>
             <VStack spacing={4} align="flex-start">
-              <FormControl isInvalid={!!errors.name && touched.name}>
+              <FormControl isInvalid={!!errors.name && touched.name} isRequired>
                 <FormLabel htmlFor="name">First name</FormLabel>
                 <Field
                   as={Input}
@@ -85,7 +85,10 @@ const SignUpForm = () => {
                 />
                 <FormErrorMessage>{errors.name}</FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={!!errors.email && touched.email}>
+              <FormControl
+                isInvalid={!!errors.email && touched.email}
+                isRequired
+              >
                 <FormLabel htmlFor="email">Email</FormLabel>
                 <Field
                   as={Input}
@@ -96,7 +99,10 @@ const SignUpForm = () => {
                 />
                 <FormErrorMessage>{errors.email}</FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={!!errors.password && touched.password}>
+              <FormControl
+                isInvalid={!!errors.password && touched.password}
+                isRequired
+              >
                 <FormLabel htmlFor="password">Password</FormLabel>
                 <Field
                   as={Input}
@@ -109,6 +115,7 @@ const SignUpForm = () => {
               </FormControl>
               <FormControl
                 isInvalid={!!errors.confirmation && touched.confirmation}
+                isRequired
               >
                 <FormLabel htmlFor="confirmation">Repeat password</FormLabel>
                 <Field
