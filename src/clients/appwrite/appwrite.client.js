@@ -60,6 +60,13 @@ class Quizes {
   }
 }
 
+const updateDocumentEvent = () => {
+  return client.subscribe("documents", (response) => {
+    console.log("response realtime");
+    console.log(response);
+  });
+};
+
 export default {
   questions,
   createAccount,
@@ -69,4 +76,5 @@ export default {
     appwriteConfig.GIFTING_DB_ID,
     appwriteConfig.QUIZ_COLLECTION_ID
   ),
+  updateDocumentEvent,
 };

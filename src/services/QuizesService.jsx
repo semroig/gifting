@@ -6,12 +6,14 @@ export class QuizesService {
     return quizes;
   }
 
-  async create(profile, responses) {
+  async create(profile, responses, yesCat, noCat) {
     const data = {
       Name: profile.name,
       Age: profile.age,
       Gender: profile.gender,
       QuestionsAnswers: JSON.stringify(responses),
+      YesCategories: yesCat,
+      NoCategories: noCat,
     };
 
     const results = await appwriteClient.quizes.createDocument(data);

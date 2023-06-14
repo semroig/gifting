@@ -10,11 +10,15 @@ const Questions = ({ maxQuestion, onFinish }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [question, setQuestion] = useState(null);
   const [questionsResponsed, setQuestionsResponsed] = useState([]);
+  const [yesCategories, setYesCategories] = useState([]);
+  const [noCategories, setNoCategories] = useState([]);
 
   const handleResponse = (event) => {
     const response = event.target.value;
 
     const currResponses = questionsResponsed;
+    const currYesCategories = yesCategories;
+    const currNoCategories = noCategories;
 
     if (response !== "skip") {
       currResponses.push({
@@ -22,11 +26,20 @@ const Questions = ({ maxQuestion, onFinish }) => {
         response: response === "true",
       });
 
+      // Add data into str json to store Q&A
       setQuestionsResponsed(currResponses);
+
+      if (response == "yes") {
+        currYesCategories.push(question.Category);
+        setYesCategories(currYesCategories);
+      } else {
+        currNoCategories.push(question.Category);
+        setNoCategories(noCategories);
+      }
     }
 
     if (currResponses.length === maxQuestion) {
-      onFinish(questionsResponsed);
+      onFinish(questionsResponsed, yesCategories, noCategories);
       return;
     }
 
