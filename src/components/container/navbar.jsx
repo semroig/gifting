@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Container, Flex, Button, useToast } from "@chakra-ui/react";
 
@@ -7,7 +7,7 @@ import { accountsService } from "services";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
   const toast = useToast();
 
   const handleSignOut = () => {
@@ -35,6 +35,13 @@ export default function Navbar() {
         });
       });
   };
+
+  // Validate if the user is uthenticated
+  useEffect(() => {
+    if (sessionStorage.getItem("sessionId")) {
+      setIsAuth(true);
+    }
+  }, []);
 
   return (
     <Box as="nav" bgColor="primary.soft">
