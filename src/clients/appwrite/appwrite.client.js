@@ -33,7 +33,7 @@ const deleteSession = () => {
 
 /**
  * Incorporar el patron Factory para poder tener la misma clase con los mismos metodos
- * para diferentes recursos/collesciones. Los metodos siempre son los mismos.
+ * para diferentes recursos/collecciones. Los metodos siempre son los mismos.
  * listDocuments, createDocument, getDocument, updateDocument, deleteDocument
  */
 class Quizes {

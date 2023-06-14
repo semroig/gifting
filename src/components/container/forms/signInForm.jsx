@@ -50,11 +50,11 @@ const SignInForm = () => {
               navigate("/quiz", { replace: true });
             })
             .catch((error) => {
-              console.log(error);
+              // Show user a toast for invalid request
               toast({
                 position: "top",
                 title: "Error logging into your account.",
-                description: "Description hereee",
+                description: error.message,
                 status: "error",
                 duration: 4000,
                 isClosable: true,

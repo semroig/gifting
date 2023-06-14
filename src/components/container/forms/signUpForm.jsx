@@ -55,11 +55,11 @@ const SignUpForm = () => {
               navigate("/quiz", { replace: true });
             })
             .catch((error) => {
-              console.log(error);
+              // Show user a toast for invalid request
               toast({
                 position: "top",
                 title: "Error creating your account.",
-                description: "Description heree.",
+                description: error.message,
                 status: "error",
                 duration: 4000,
                 isClosable: true,

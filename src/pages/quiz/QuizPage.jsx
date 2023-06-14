@@ -23,7 +23,7 @@ const QuizPage = () => {
   return (
     <div>
       {initialData ? (
-        <Questions maxQuestion={3} onFinish={handleFinishQuiz}></Questions>
+        <Questions maxQuestion={5} onFinish={handleFinishQuiz}></Questions>
       ) : (
         <InitialQuestions next={next}></InitialQuestions>
       )}

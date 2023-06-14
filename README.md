@@ -38,3 +38,11 @@ npm run dev
 ## Project structure
 
 ## Contributors?
+
+Que hacer cuando no se completa la edad?
+Como reestringir la cant de skips? O terminar antes la pregunta...
+Guardar las categorias en los arrays
+Que la function gestione los arrays vacios
+Cambiar session storage a local storage (diferencia?)
+Session storage de name siempre! (q no sea mail cuando te logeaste)
+Ver historial especifico al tocar card de old quiz
