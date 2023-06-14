@@ -31,18 +31,42 @@ const deleteSession = () => {
   return account.deleteSession(sessionStorage.getItem("sessionId"));
 };
 
-const quizes = (queries) => {
-  return databases.listDocuments(
-    appwriteConfig.GIFTING_DB_ID,
-    appwriteConfig.QUIZ_COLLECTION_ID,
-    queries && [queries]
-  );
-};
+/**
+ * Incorporar el patron Factory para poder tener la misma clase con los mismos metodos
+ * para diferentes recursos/collesciones. Los metodos siempre son los mismos.
+ * listDocuments, createDocument, getDocument, updateDocument, deleteDocument
+ */
+class Quizes {
+  constructor(dbId, collectionId) {
+    this.giftingDbId = dbId;
+    this.collectionId = collectionId;
+  }
+
+  async listDocuments(queries) {
+    return await databases.listDocuments(
+      this.giftingDbId,
+      this.collectionId,
+      queries && [queries]
+    );
+  }
+
+  async createDocument(data) {
+    return databases.createDocument(
+      this.giftingDbId,
+      this.collectionId,
+      ID.unique(),
+      data
+    );
+  }
+}
 
 export default {
   questions,
   createAccount,
   createEmailSession,
   deleteSession,
-  quizes,
+  quizes: new Quizes(
+    appwriteConfig.GIFTING_DB_ID,
+    appwriteConfig.QUIZ_COLLECTION_ID
+  ),
 };

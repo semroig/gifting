@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Text, Button, Flex, Container, Stack } from "@chakra-ui/react";
+
+import { Text, Button, Container, Stack } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
 import { questionsService } from "services";
 import Stepper from "components/pure/stepper";
 
-const MAX_QUESTIONS = 3; // must be a prop
-
-const Questions = ({ initialData }) => {
-  const navigate = useNavigate();
-
+const Questions = ({ maxQuestion, onFinish }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [question, setQuestion] = useState(null);
   const [questionsResponsed, setQuestionsResponsed] = useState([]);
@@ -29,8 +25,9 @@ const Questions = ({ initialData }) => {
       setQuestionsResponsed(currResponses);
     }
 
-    if (currResponses.length === MAX_QUESTIONS) {
-      return navigate("/quiz/results");
+    if (currResponses.length === maxQuestion) {
+      onFinish(questionsResponsed);
+      return;
     }
 
     const questionsIds = currResponses.map((response) => {
@@ -59,7 +56,7 @@ const Questions = ({ initialData }) => {
 
   return (
     <Container mt={20} maxWidth="container.sm">
-      <Stepper step={questionsResponsed.length} max={MAX_QUESTIONS} mb={6} />
+      <Stepper step={questionsResponsed.length} max={maxQuestion} mb={6} />
 
       <Text fontWeight="semibold" fontSize="xl" my={4}>
         {question.Description}
@@ -98,7 +95,8 @@ const Questions = ({ initialData }) => {
 };
 
 Questions.propTypes = {
-  initialData: PropTypes.isRequired,
+  maxQuestion: PropTypes.number.isRequired,
+  onFinish: PropTypes.func.isRequired,
 };
 
 export default Questions;
