@@ -73,7 +73,7 @@ export default function Hero() {
               w={"100%"}
               h={"100%"}
               src={
-                "https://cloud.appwrite.io/v1/storage/buckets/648b740903d6396c77bb/files/648b74c5a758e5051e9e/view?project=646be96ac195499e31c0&mode=admin"
+                "https://cloud.appwrite.io/v1/storage/buckets/648b740903d6396c77bb/files/648b891479520c268578/view?project=646be96ac195499e31c0&mode=admin"
               }
             />
           </Box>

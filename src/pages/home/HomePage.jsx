@@ -54,7 +54,7 @@ const HomePage = () => {
             </CardBody>
           </Box>
           <Image
-            src="src/assets/globo.png"
+            src="https://cloud.appwrite.io/v1/storage/buckets/648b740903d6396c77bb/files/648b74217304aa3d6951/view?project=646be96ac195499e31c0&mode=admin"
             alt="Dan Abramov"
             boxSize="220px"
             objectFit="cover"
