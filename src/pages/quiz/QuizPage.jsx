@@ -5,13 +5,9 @@ import Questions from "components/container/questions";
 import InitialQuestions from "components/container/initialQuestions";
 
 import { quizesService } from "services";
-import { realtimeService } from "services";
-import { productService } from "services";
 
-import { Client, Databases, Account, ID } from "appwrite";
+import { Client } from "appwrite";
 import { appwriteConfig } from "config";
-
-import ResultsPage from "pages/results/ResultsPage";
 
 const QuizPage = () => {
   const navigate = useNavigate();
@@ -36,7 +32,7 @@ const QuizPage = () => {
       .setEndpoint(appwriteConfig.ENDPOINT)
       .setProject(appwriteConfig.PROJECT_ID);
 
-    const unsubscribe = client.subscribe("documents", (response) => {
+    client.subscribe("documents", (response) => {
       console.log("response realtime");
       console.log(response);
 

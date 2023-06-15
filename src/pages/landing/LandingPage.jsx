@@ -1,7 +1,9 @@
+import Hero from "components/pure/hero";
+
 const LandingPage = () => {
   return (
     <div>
-      <p>Landing page</p>
+      <Hero></Hero>
     </div>
   );
 };

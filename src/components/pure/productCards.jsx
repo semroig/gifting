@@ -1,19 +1,11 @@
 import PropTypes from "prop-types";
 import {
-  Container,
   Card,
   CardBody,
   Heading,
-  Text,
-  CardHeader,
-  Button,
-  Stack,
   Image,
-  Box,
   WrapItem,
   Wrap,
-  CardFooter,
-  SimpleGrid,
   Center,
 } from "@chakra-ui/react";
 
