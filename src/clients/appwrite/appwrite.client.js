@@ -18,6 +18,14 @@ const questions = (queries) => {
   );
 };
 
+const products = (queries) => {
+  return databases.listDocuments(
+    appwriteConfig.GIFTING_DB_ID,
+    appwriteConfig.PRODUCT_COLLECTION_ID,
+    queries && [queries]
+  );
+};
+
 // Revisar docu de Create Email Verification
 const createAccount = (body) => {
   return account.create(ID.unique(), body.email, body.password, body.name);
@@ -60,10 +68,17 @@ class Quizes {
   }
 }
 
+// Reemplazar con ids de variables de entorno
 const updateDocumentEvent = () => {
   return client.subscribe("documents", (response) => {
     console.log("response realtime");
     console.log(response);
+
+    if (response.payload.Results.length) {
+      console.log("estoy en el if the results");
+      // Save session id on session storage
+      sessionStorage.setItem("resultIds", response.payload.Results);
+    }
   });
 };
 
@@ -77,4 +92,5 @@ export default {
     appwriteConfig.QUIZ_COLLECTION_ID
   ),
   updateDocumentEvent,
+  products,
 };

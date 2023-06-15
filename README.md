@@ -45,4 +45,9 @@ Guardar las categorias en los arrays
 Que la function gestione los arrays vacios
 Cambiar session storage a local storage (diferencia?)
 Session storage de name siempre! (q no sea mail cuando te logeaste)
-Ver historial especifico al tocar card de old quiz
+Ver historial especifico al tocar card de old quiz -> quiz/id routes
+Armar teams y sistemas de permisos en appwrite
+Guardar user id en session storage
+Enviar user id al crear quiz
+Filtrar quizes por user id cuando estas subscripto al realtime
+Cerrar subscripcion de realtime

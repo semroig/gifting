@@ -25,8 +25,8 @@ export default function MainRouter() {
           <Route path="/quiz" element={<Outlet />}>
             <Route index element={<HomePage />} />
             <Route path="questions" element={<QuizPage />} />
-            <Route path="results" element={<ResultsPage />} />
             <Route path="history" element={<HistoryPage />} />
+            <Route path=":paramId" element={<ResultsPage />} />
           </Route>
         </Route>
 
