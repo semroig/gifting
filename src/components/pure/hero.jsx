@@ -38,7 +38,7 @@ export default function Hero() {
                 zIndex: -1,
               }}
             >
-              Your app,
+              Your app
             </Text>
             <br />
             <Text as={"span"} color={"accent"}>

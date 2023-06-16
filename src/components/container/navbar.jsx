@@ -25,14 +25,19 @@ export default function Navbar() {
       })
       .catch((error) => {
         console.log(error);
-        toast({
-          position: "top",
-          title: "Error closing your session.",
-          description: "Description hereee",
-          status: "error",
-          duration: 4000,
-          isClosable: true,
-        });
+
+        // Delete saved credentials locally
+        sessionStorage.removeItem("name");
+        sessionStorage.removeItem("sessionId");
+
+        // toast({
+        //   position: "top",
+        //   title: "Error closing your session on server.",
+        //   description: "Description hereee",
+        //   status: "error",
+        //   duration: 4000,
+        //   isClosable: true,
+        // });
       });
   };
 
