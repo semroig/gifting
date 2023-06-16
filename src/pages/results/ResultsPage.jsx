@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Heading, Text, Center } from "@chakra-ui/react";
+import { Container, Heading, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 import ProductCards from "components/pure/productCards";
