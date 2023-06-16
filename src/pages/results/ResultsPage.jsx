@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Heading } from "@chakra-ui/react";
+import { Container, Heading, Text, Center } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 import ProductCards from "components/pure/productCards";
@@ -45,9 +45,13 @@ const ResultsPage = () => {
 
   return (
     <Container my={20} maxW="container.lg">
-      <Heading size="lg" color="text" mt={10}>
-        Here are 3 gifting ideas for your friend {name}:
+      <Heading size="lg" color="text">
+        We got you covered!
       </Heading>
+
+      <Text color="text" fontSize="xl">
+        Here are three gifting ideas for your friend {name}
+      </Text>
 
       {resultDocuments.length > 0 ? (
         <ProductCards productDocuments={resultDocuments}></ProductCards>

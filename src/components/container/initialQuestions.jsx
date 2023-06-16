@@ -16,13 +16,13 @@ import PropTypes from "prop-types";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
-  age: Yup.string(),
+  age: Yup.number(),
   gender: Yup.string().required("Gender is required"),
 });
 
 const initialValues = {
   name: "",
-  age: "",
+  age: 0,
   gender: "",
 };
 
@@ -41,10 +41,10 @@ const InitialQuestions = ({ next }) => {
     <div>
       <Container mt={20} mb={10} maxW="lg">
         <Heading size="md" color="text">
-          Before we start, please complete this information about your friend
+          Please complete this info about your friend
         </Heading>
         <Text color="text" fontSize="md">
-          It will help us in thinking better results for gifting ideas!
+          This helps us with thinking better results for gifting ideas!
         </Text>
       </Container>
 
@@ -98,9 +98,11 @@ const InitialQuestions = ({ next }) => {
               <FormErrorMessage>{formik.errors.gender}</FormErrorMessage>
             </FormControl>
 
-            <Button w="full" type="submit" mt="auto" variant="secondary">
-              Start the quiz
-            </Button>
+            <div>
+              <Button w="full" type="submit" mt={5} variant="secondary">
+                Start the quiz
+              </Button>
+            </div>
           </VStack>
         </form>
       </Container>

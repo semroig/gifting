@@ -1,16 +1,4 @@
-import {
-  Container,
-  Card,
-  CardBody,
-  Heading,
-  Text,
-  CardHeader,
-  Button,
-  Stack,
-  Image,
-  Box,
-  Center,
-} from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 
 export default function Logo() {
   return (
