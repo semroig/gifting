@@ -30,6 +30,8 @@ export default function Navbar() {
         sessionStorage.removeItem("name");
         sessionStorage.removeItem("sessionId");
 
+        setIsAuth(false);
+
         // toast({
         //   position: "top",
         //   title: "Error closing your session on server.",

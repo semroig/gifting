@@ -2,12 +2,6 @@
 
 Gifting is a project built to participate into the [Appwrite + Hashnode Hackathon](https://hashnode.com/hackathons/appwrite). It's online hosted by Netlify, click [here](https://main--strong-banoffee-c8a8e0.netlify.app/) to play demo.
 
-## How to start the project?
-
-### Create Appwrite cloud project
-
-### Set environment variables
-
 ### Run project local
 
 First, you need to install all dependencies and packages:
@@ -22,24 +16,7 @@ Then, you can start the app using:
 npm run dev
 ```
 
-## Useful code
-
-// // Con esto se pueden crear registros!
-// const promise = databases.createDocument(
-//     '646beb350730365f9314', '646beb48cf58113e0f44', ID.unique(), {
-//         Description: "prueba"
-//     }
-// );
-
-## Features
-
-## Publishing
-
-## Project structure
-
-## Contributors?
-
-Que hacer cuando no se completa la edad?
+<!-- Que hacer cuando no se completa la edad?
 Como reestringir la cant de skips? O terminar antes la pregunta...
 Guardar las categorias en los arrays
 Que la function gestione los arrays vacios
@@ -50,4 +27,4 @@ Armar teams y sistemas de permisos en appwrite
 Guardar user id en session storage
 Enviar user id al crear quiz
 Filtrar quizes por user id cuando estas subscripto al realtime
-Cerrar subscripcion de realtime
+Cerrar subscripcion de realtime -->
