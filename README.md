@@ -16,6 +16,12 @@ Then, you can start the app using:
 npm run dev
 ```
 
+## Important links
+
+📖 Complete documentation [here](https://semroig.hashnode.dev/gifting) on Hashnode.
+📹 Demo video [here](https://www.youtube.com/watch?v=GSkOg9Ln0SY&t=3s) on Youtube.
+
+
 <!-- Que hacer cuando no se completa la edad?
 Como reestringir la cant de skips? O terminar antes la pregunta...
 Guardar las categorias en los arrays
