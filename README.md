@@ -22,7 +22,8 @@ npm run dev
 📹 Demo video [here](https://www.youtube.com/watch?v=GSkOg9Ln0SY&t=3s) on Youtube.
 
 
-<!-- Que hacer cuando no se completa la edad?
+<!-- 
+Que hacer cuando no se completa la edad?
 Como reestringir la cant de skips? O terminar antes la pregunta...
 Guardar las categorias en los arrays
 Que la function gestione los arrays vacios
@@ -33,4 +34,7 @@ Armar teams y sistemas de permisos en appwrite
 Guardar user id en session storage
 Enviar user id al crear quiz
 Filtrar quizes por user id cuando estas subscripto al realtime
-Cerrar subscripcion de realtime -->
+Cerrar subscripcion de realtime 
+
+Verificar email https://appwrite.io/docs/client/account#accountCreateVerification
+-->
