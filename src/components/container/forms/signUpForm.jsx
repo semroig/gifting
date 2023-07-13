@@ -47,12 +47,31 @@ const SignUpForm = () => {
 
           accountsService
             .createAccount(values)
-            .then((resp) => {
-              // Save session id on session storage
-              sessionStorage.setItem("name", resp.name);
-              sessionStorage.setItem("sessionId", resp.$id);
+            .then(() => {
+              // After sig up was successful, I call the method to create session
+              accountsService
+                .createEmailSession(values)
+                .then((resp) => {
+                  // Save session id on session storage
+                  sessionStorage.setItem("name", resp.providerUid);
+                  sessionStorage.setItem("sessionId", resp.$id);
 
-              navigate("/quiz", { replace: true });
+                  navigate("/quiz", { replace: true });
+                })
+                .catch((error) => {
+                  // Show user a toast for invalid request
+                  toast({
+                    position: "top",
+                    title: "Error logging into your account.",
+                    description: error.message,
+                    status: "error",
+                    duration: 4000,
+                    isClosable: true,
+                  });
+                })
+                .finally(() => {
+                  setIsLoading(false);
+                });
             })
             .catch((error) => {
               // Show user a toast for invalid request
