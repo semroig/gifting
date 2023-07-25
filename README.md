@@ -32,7 +32,6 @@ npm run dev
 - Cambiar session storage a local storage (diferencia?)
 - Session storage de name siempre! (q no sea mail cuando te logeaste)
 - Armar teams y sistemas de permisos en appwrite
-- Guardar user id en session storage
 - Cerrar subscripcion de realtime
 - Cuando elegis skip, que no te muestre la misma pregunta
 
