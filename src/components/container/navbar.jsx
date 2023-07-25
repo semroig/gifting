@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Container, Flex, Button, useToast } from "@chakra-ui/react";
+import { Box, Container, Flex, Button } from "@chakra-ui/react";
 
 import Logo from "components/pure/logo";
 import { accountsService } from "services";
@@ -8,7 +8,6 @@ import { accountsService } from "services";
 export default function Navbar() {
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(false);
-  const toast = useToast();
 
   const handleSignOut = () => {
     // Call de service to logout from Appwrite server session
@@ -20,26 +19,20 @@ export default function Navbar() {
         // Delete saved credentials locally
         sessionStorage.removeItem("name");
         sessionStorage.removeItem("sessionId");
+        sessionStorage.removeItem("userId");
 
         navigate("/", { replace: true });
       })
       .catch((error) => {
+        setIsAuth(false);
         console.log(error);
 
         // Delete saved credentials locally
         sessionStorage.removeItem("name");
         sessionStorage.removeItem("sessionId");
+        sessionStorage.removeItem("userId");
 
-        setIsAuth(false);
-
-        // toast({
-        //   position: "top",
-        //   title: "Error closing your session on server.",
-        //   description: "Description hereee",
-        //   status: "error",
-        //   duration: 4000,
-        //   isClosable: true,
-        // });
+        navigate("/", { replace: true });
       });
   };
 

@@ -46,6 +46,7 @@ const SignInForm = () => {
               // Save session id on session storage
               sessionStorage.setItem("name", resp.providerUid);
               sessionStorage.setItem("sessionId", resp.$id);
+              sessionStorage.setItem("userId", resp.userId);
 
               navigate("/quiz", { replace: true });
             })

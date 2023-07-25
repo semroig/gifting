@@ -23,18 +23,18 @@ npm run dev
 
 
 <!-- 
-- Que hacer cuando no se completa la edad?
+- Filtrar quizes por user id cuando estas subscripto al realtime
+- Enviar user id al crear quiz
+- Ver historial especifico al tocar card de old quiz -> quiz/id routes
 - Como reestringir la cant de skips? O terminar antes la pregunta...
 - Guardar las categorias en los arrays
 - Que la function gestione los arrays vacios
 - Cambiar session storage a local storage (diferencia?)
 - Session storage de name siempre! (q no sea mail cuando te logeaste)
-- Ver historial especifico al tocar card de old quiz -> quiz/id routes
 - Armar teams y sistemas de permisos en appwrite
 - Guardar user id en session storage
-- Enviar user id al crear quiz
-- Filtrar quizes por user id cuando estas subscripto al realtime
-- Cerrar subscripcion de realtime 
+- Cerrar subscripcion de realtime
+- Cuando elegis skip, que no te muestre la misma pregunta
 
 Verificar email https://appwrite.io/docs/client/account#accountCreateVerification
 -->
